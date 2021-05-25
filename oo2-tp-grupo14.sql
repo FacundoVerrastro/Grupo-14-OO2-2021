@@ -11,13 +11,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `oo2-tp-grupo14` DEFAULT CHARACTER SET utf8 ;
-USE `oo2-tp-grupo14` ;
+CREATE SCHEMA IF NOT EXISTS `Grupo-14-BDD-OO2-2021` DEFAULT CHARACTER SET utf8 ;
+USE `Grupo-14-BDD-OO2-2021` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Perfil`
+-- Table `Grupo-14-BDD-OO2-2021`.`Perfil`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `oo2-tp-grupo14`.`Perfil` (
+CREATE TABLE IF NOT EXISTS `Grupo-14-BDD-OO2-2021`.`Perfil` (
   `idPerfil` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NULL,
   PRIMARY KEY (`idPerfil`))
@@ -25,9 +25,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Usuario`
+-- Table `Grupo-14-BDD-OO2-2021`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `oo2-tp-grupo14`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `Grupo-14-BDD-OO2-2021`.`Usuario` (
   `idUsuario` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `apellido` VARCHAR(45) NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `oo2-tp-grupo14`.`Usuario` (
   `nomUsuario` VARCHAR(45) NULL,
   `contraseña` VARCHAR(45) NULL,
   `idPerfil` INT NOT NULL,
-  PRIMARY KEY (`idUsuario`, `idPerfil`))
+  PRIMARY KEY (`idUsuario`))
 ENGINE = InnoDB;
 
 
