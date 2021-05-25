@@ -13,4 +13,13 @@ public class HomeController {
 		return "home/index";
 	}
 
+	@GetMapping("helloworld")
+	public String helloworld() {
+		return "hola/helloworld";
+	}
+	
+	@GetMapping("holamundo")
+	public String holamundo() {
+		return "hola/holamundo";
+	}
 }

@@ -1,9 +1,10 @@
-logging:
-  config: # TODO: Add config
-  exception-conversion-word: # TODO: Add config
-  file: # TODO: Add config
-    path: # TODO: Add config
-  pattern:
-    console: # TODO: Add config
-    file: # TODO: Add config
-    level: # TODO: Add config
+spring:
+  datasource:    url: jdbc:mysql://localhost:3306/grupo-14-bdd-oo2-2021
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:      ddl-auto: update
+      naming:        strategy: org.hibernate.cfg.ImprovedNaming.Strategy
+    properties:
+      dialect: org.hibernate.dialect.MySQL5Dialect
