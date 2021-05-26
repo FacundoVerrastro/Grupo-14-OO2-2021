@@ -1,9 +1,12 @@
+package com.unla.Grupo14OO22021.services.implementation;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.unla.Grupo14OO22021.converters.UsuarioConverter;
 import com.unla.Grupo14OO22021.entities.Usuario;
 import com.unla.Grupo14OO22021.models.UsuarioModel;
 import com.unla.Grupo14OO22021.repositories.IUsuarioRepository;
@@ -34,7 +37,8 @@ public class UsuarioService implements IUsuarioService{
 	@Override
 	public boolean remove(int id) {
 		try {
-			usuarioRepository.deleteById(id);
+			usuarioRepository.delete(usuarioRepository.findByIdUsuario(id));
+			//usuarioRepository.deleteById;
 			return true;
 		}catch(Exception e){
 			return false;

@@ -1,7 +1,5 @@
 package com.unla.Grupo14OO22021.converters;
 
-
-
 import org.springframework.stereotype.Component;
 
 import com.unla.Grupo14OO22021.entities.Perfil;

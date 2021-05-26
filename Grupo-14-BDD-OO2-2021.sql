@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `grupo-14-bdd-oo2-2021`.`perfil` (
   `tipo` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_perfil`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -49,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `grupo-14-bdd-oo2-2021`.`usuario` (
     FOREIGN KEY (`id_perfil`)
     REFERENCES `grupo-14-bdd-oo2-2021`.`perfil` (`id_perfil`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
