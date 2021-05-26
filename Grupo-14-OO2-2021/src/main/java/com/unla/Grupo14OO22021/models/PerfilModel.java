@@ -6,7 +6,6 @@ public class PerfilModel {
 
 	private int idPerfil;
 	private String tipo;
-	private Set<UsuarioModel> usuarios;
 
 	public PerfilModel() {
 		super();
@@ -19,12 +18,6 @@ public class PerfilModel {
 	}
 	
 
-	public PerfilModel(int idPerfil, String tipo, Set<UsuarioModel> usuarios) {
-		super();
-		this.idPerfil = idPerfil;
-		this.tipo = tipo;
-		this.usuarios = usuarios;
-	}
 
 	public int getIdPerfil() {
 		return idPerfil;
@@ -42,12 +35,5 @@ public class PerfilModel {
 		this.tipo = tipo;
 	}
 
-	public Set<UsuarioModel> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<UsuarioModel> usuarios) {
-		this.usuarios = usuarios;
-	}
 	
 }

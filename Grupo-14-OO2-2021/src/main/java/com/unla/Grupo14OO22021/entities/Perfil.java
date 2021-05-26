@@ -15,8 +15,38 @@ public class Perfil {
 
 	@Column (name= "tipo", nullable = false)
 	private String tipo;
-	
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "perfil")
-	private Set<Usuario> usuarios = new HashSet<Usuario>();
 
+	public Perfil() {
+		super();
+	}
+	
+	public Perfil(int idPerfil, String tipo) {
+		super();
+		this.idPerfil = idPerfil;
+		this.tipo = tipo;
+	}
+
+	public int getIdPerfil() {
+		return idPerfil;
+	}
+
+	public void setIdPerfil(int idPerfil) {
+		this.idPerfil = idPerfil;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	
+
+
+	
+
+	
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.unla.Grupo14OO22021.converters.PerfilConverter;
 import com.unla.Grupo14OO22021.entities.Perfil;
 import com.unla.Grupo14OO22021.models.PerfilModel;
 import com.unla.Grupo14OO22021.repositories.IPerfilRepository;
