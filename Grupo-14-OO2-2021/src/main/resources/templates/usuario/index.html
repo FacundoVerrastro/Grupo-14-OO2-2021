@@ -25,13 +25,13 @@
 		</tbody>
 	</table>
 	<form action="#" th:action="@{/usuarios/}" th:object="${usuario}" method="post">
-		<p>ombre: <input type="text th:field=" *{nombre}" /></p>
+		<p>nombre: <input type="text" th:field=" *{nombre}" /></p>
 		<p>Apellido: <input type="text" th:field="*{apellido}" />
-		<p>Tipo de Documento: <input type="text th:field=" *{tipoDocumento}" /></p>
-		<p>Numero de Documento: <input type="text th:field=" *{numeroDocumento}" /></p>
-		<p>Email: <input type="text th:field=" *{email}" /></p>
-		<p>Nombre de usuario: <input type="text th:field=" *{nomUsuario}" /></p>
-		<p>Contraseña: <input type="text th:field=" *{contraseña}" /></p>
-		<p>perfil: <input type="text th:field=" *{perfil}" /></p>
+		<p>Tipo de Documento: <input type="text" th:field=" *{tipoDocumento}" /></p>
+		<p>Numero de Documento: <input type="text" th:field=" *{numeroDocumento}" /></p>
+		<p>Email: <input type="text" th:field=" *{email}" /></p>
+		<p>Nombre de usuario: <input type="text" th:field=" *{nomUsuario}" /></p>
+		<p>Contraseña: <input type="text" th:field=" *{contraseña}" /></p>
+		<p>perfil: <input type="text" th:field=" *{perfil}" /></p>
 		<input type="submit" />
 	</form>

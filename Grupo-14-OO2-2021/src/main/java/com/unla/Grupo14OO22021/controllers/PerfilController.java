@@ -10,28 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22021.models.PerfilModel;
 import com.unla.Grupo14OO22021.models.UsuarioModel;
+import com.unla.Grupo14OO22021.services.IPerfilService;
 import com.unla.Grupo14OO22021.services.IUsuarioService;
 
 @Controller
-@RequestMapping("/usuarios")
-public class UsuarioController {
-	
+@RequestMapping("/perfiles")
+public class PerfilController {
+
 	@Autowired
-	@Qualifier("usuarioService")//decia usuario controller
-	private IUsuarioService usuarioService;
+	@Qualifier("perfilService")
+	private IPerfilService perfilService;
 
 	@GetMapping("/")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("usuario/index");
-		mAV.addObject("usuarios", usuarioService.getAll());
-		mAV.addObject("usuario", new UsuarioModel());
+		ModelAndView mAV = new ModelAndView("perfil/index");
+		mAV.addObject("perfiles", perfilService.getAll());
+		mAV.addObject("perfil", new PerfilModel());
 		return mAV;
 	}
 
 	@PostMapping("/")
-	public RedirectView create (@ModelAttribute("usuario") UsuarioModel usuarioModel) {
-		usuarioService.insertOrUpdate(usuarioModel);
-		return new RedirectView("home/index");
+	public RedirectView create (@ModelAttribute("perfil") PerfilModel perfilModel) {
+		perfilService.insertOrUpdate(perfilModel);
+		return new RedirectView("");
 	}
 }
