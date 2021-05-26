@@ -1,0 +1,37 @@
+<table>
+		<thead>
+			<tr>
+				<th>nombre</th>
+				<th>apellido</th>
+				<th>tipoDocumento</th>
+				<th>numeroDocumento</th>
+				<th>email</th>
+				<th>nomUsuario</th>
+				<th>contraseña</th>
+				<th>perfil</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario :${usuarios}">
+				<td><span th:text="${usuario.nombre}" /></td>
+				<td><span th:text="${usuario.apellido}" /></td>
+				<td><span th:text="${usuario.tipoDocumento}" /></td>
+				<td><span th:text="${usuario.numeroDocumento}" /></td>
+				<td><span th:text="${usuario.email}" /></td>
+				<td><span th:text="${usuario.nomUsuario}" /></td>
+				<td><span th:text="${usuario.contraseña}" /></td>
+				<td><span th:text="${usuario.perfil}" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<form action="#" th:action="@{/usuarios/}" th:object="${usuario}" method="post">
+		<p>ombre: <input type="text th:field=" *{nombre}" /></p>
+		<p>Apellido: <input type="text" th:field="*{apellido}" />
+		<p>Tipo de Documento: <input type="text th:field=" *{tipoDocumento}" /></p>
+		<p>Numero de Documento: <input type="text th:field=" *{numeroDocumento}" /></p>
+		<p>Email: <input type="text th:field=" *{email}" /></p>
+		<p>Nombre de usuario: <input type="text th:field=" *{nomUsuario}" /></p>
+		<p>Contraseña: <input type="text th:field=" *{contraseña}" /></p>
+		<p>perfil: <input type="text th:field=" *{perfil}" /></p>
+		<input type="submit" />
+	</form>
