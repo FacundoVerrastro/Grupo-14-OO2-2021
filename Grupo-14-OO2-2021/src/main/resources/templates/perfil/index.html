@@ -1,0 +1,17 @@
+<table>
+		<thead>
+			<tr>
+				<th>tipo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="perfil :${perfiles}">
+				<td><span th:text="${perfil.tipo}" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<form action="#" th:action="@{/perfiles/}" th:object="${perfil}" method="post">
+		<p>tipo: <input type="text" th:field=" *{tipo}" /></p>
+		<input type="submit" />
+	</form>
+	
