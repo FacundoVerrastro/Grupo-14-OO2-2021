@@ -29,8 +29,8 @@ public class Usuario {
 	@Column(name="nomUsuario", nullable=false)
     private String nomUsuario;
 	
-	@Column(name="contraseña", nullable=false)
-    private String contraseña;
+	@Column(name="password", nullable=false)
+    private String password;
 	
 	@ManyToOne
 	@JoinColumn (name="idPerfil")
@@ -45,7 +45,7 @@ public class Usuario {
 
 
 	public Usuario(int idUsuario, String nombre, String apellido, String tipoDocumento, int numeroDocumento,
-			String email, String nomUsuario, String contraseña, Perfil perfil) {
+			String email, String nomUsuario, String password, Perfil perfil) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -54,7 +54,7 @@ public class Usuario {
 		this.numeroDocumento = numeroDocumento;
 		this.email = email;
 		this.nomUsuario = nomUsuario;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.perfil = perfil;
 	}
 
@@ -144,14 +144,14 @@ public class Usuario {
 
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 

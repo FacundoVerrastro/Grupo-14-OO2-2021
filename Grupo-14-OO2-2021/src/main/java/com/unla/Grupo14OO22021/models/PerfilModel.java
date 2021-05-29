@@ -33,7 +33,5 @@ public class PerfilModel {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-
-	
+	}	
 }
