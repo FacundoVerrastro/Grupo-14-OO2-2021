@@ -8,7 +8,7 @@ public class UsuarioModel {
     private int numeroDocumento;
     private String email;
     private String nomUsuario;
-    private String contraseña;
+    private String password;
     private PerfilModel perfil;
     
     public UsuarioModel() {
@@ -16,7 +16,7 @@ public class UsuarioModel {
     }
     
     public UsuarioModel(int idUsuario, String nombre, String apellido, String tipoDocumento, int numeroDocumento,
-			String email, String nomUsuario, String contraseña) {
+			String email, String nomUsuario, String password) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -25,7 +25,7 @@ public class UsuarioModel {
 		this.numeroDocumento = numeroDocumento;
 		this.email = email;
 		this.nomUsuario = nomUsuario;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
 
 	public UsuarioModel(int idUsuario, String nombre, String apellido,
@@ -39,7 +39,7 @@ public class UsuarioModel {
         this.numeroDocumento = numeroDocumento;
         this.email = email;
         this.nomUsuario = nomUsuario;
-        this.contraseña = contraseña;
+        this.password = contraseña;
         this.perfil = perfil;
     }
 	public int getIdUsuario() {
@@ -84,11 +84,11 @@ public class UsuarioModel {
 	public void setNomUsuario(String nomUsuario) {
 		this.nomUsuario = nomUsuario;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public PerfilModel getPerfil() {
 		return perfil;
