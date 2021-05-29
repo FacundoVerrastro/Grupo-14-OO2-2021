@@ -13,7 +13,7 @@ public class UsuarioConverter {
 	public UsuarioModel entityToModel(Usuario usuario) {
 		return new UsuarioModel(usuario.getIdUsuario(),usuario.getNombre(),
 				usuario.getApellido(),usuario.getTipoDocumento(),usuario.getNumeroDocumento(),
-				usuario.getEmail(),usuario.getNomUsuario(),usuario.getContraseña());
+				usuario.getEmail(),usuario.getNomUsuario(),usuario.getPassword());
 	}
 	
 	public Usuario modelToEntity(UsuarioModel usuarioModel) {
@@ -21,6 +21,6 @@ public class UsuarioConverter {
 		return new Usuario(usuarioModel.getIdUsuario(), usuarioModel.getNombre(), 
 				usuarioModel.getApellido(), usuarioModel.getTipoDocumento(), 
 				usuarioModel.getNumeroDocumento(), usuarioModel.getEmail(), 
-				usuarioModel.getNomUsuario(), usuarioModel.getContraseña(), perfilConverter.modelToEntity(usuarioModel.getPerfil()));
+				usuarioModel.getNomUsuario(), usuarioModel.getPassword(), perfilConverter.modelToEntity(usuarioModel.getPerfil()));
 	}
 }
