@@ -1,6 +1,11 @@
 package com.unla.Grupo14OO22021.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
@@ -26,16 +31,27 @@ public class Usuario {
 	@Column(name="email", nullable=false)
     private String email;
 	
-	@Column(name="nomUsuario", nullable=false)
+	@Column(name="nomUsuario",unique=true, nullable=false)
     private String nomUsuario;
 	
 	@Column(name="password", nullable=false)
     private String password;
 	
-	@ManyToOne
+	@Column(name="enabled")
+	private boolean enabled;
+	
+	@Column(name="createdat")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@Column(name="updatedat")
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
+	
+	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn (name="idPerfil")
     private Perfil perfil;
-
+	
 	
 	
 	public Usuario() {
@@ -154,6 +170,18 @@ public class Usuario {
 		this.password = password;
 	}
 
+	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 
 
 	public Perfil getPerfil() {
@@ -164,6 +192,16 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento="
+				+ tipoDocumento + ", numeroDocumento=" + numeroDocumento + ", email=" + email + ", nomUsuario="
+				+ nomUsuario + ", password=" + password + ", enabled=" + enabled + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", perfil=" + perfil + "]";
 	}
 	
 	

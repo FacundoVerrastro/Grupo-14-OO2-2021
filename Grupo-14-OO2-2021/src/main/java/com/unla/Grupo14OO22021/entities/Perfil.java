@@ -1,12 +1,16 @@
 package com.unla.Grupo14OO22021.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.time.LocalDateTime;
+
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
-@Table(name = "perfil")
+@Table(name = "perfil", uniqueConstraints=@UniqueConstraint(columnNames= {"tipo"}))
 public class Perfil {
 
 	@Id
@@ -15,7 +19,15 @@ public class Perfil {
 
 	@Column (name= "tipo", nullable = false)
 	private String tipo;
-
+	
+	@Column(name="createdat")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@Column(name="updatedat")
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
+	
 	public Perfil() {
 		super();
 	}
@@ -40,6 +52,12 @@ public class Perfil {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "Perfil [idPerfil=" + idPerfil + ", tipo=" + tipo + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt+"]";
 	}
 
 	
