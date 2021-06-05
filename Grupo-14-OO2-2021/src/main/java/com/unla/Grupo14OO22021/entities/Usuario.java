@@ -9,7 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"idPerfil"}))
 public class Usuario {
 	
 	@Id
@@ -34,7 +34,7 @@ public class Usuario {
 	@Column(name="nomUsuario",unique=true, nullable=false)
     private String nomUsuario;
 	
-	@Column(name="password", nullable=false)
+	@Column(name="password", nullable=false, length=60)
     private String password;
 	
 	@Column(name="enabled")
@@ -51,8 +51,6 @@ public class Usuario {
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn (name="idPerfil")
     private Perfil perfil;
-	
-	
 	
 	public Usuario() {
 		super();

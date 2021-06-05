@@ -1,4 +1,4 @@
-package com.unla.Grupo14OO22021.repositories;
+ package com.unla.Grupo14OO22021.repositories;
 
 import java.io.Serializable;
 import java.util.List;

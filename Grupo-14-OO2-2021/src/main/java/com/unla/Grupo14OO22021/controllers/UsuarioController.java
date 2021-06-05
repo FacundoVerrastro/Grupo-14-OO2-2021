@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -63,9 +62,6 @@ public class UsuarioController {
 
 	@GetMapping(value="/editar/{id}")
 	public String modificarUsuario(@PathVariable int id,Model model) {
-//		ModelAndView mAV = new ModelAndView("usuario/modificarUsuario");
-//		mAV.addObject("usuarios", usuarioRepository.findById(id));
-//		mAV.addObject("usuario", usuarioConverter.entityToModel(usuarioRepository.findById(id).orElse(null)));
 		model.addAttribute(usuarioRepository.findById(id).orElse(null));
 		model.addAttribute("lstPerfiles",perfilService.getAll());
 		return "usuario/modificarUsuario";
@@ -105,21 +101,4 @@ public class UsuarioController {
 		return "redirect:/usuarios/";
 	}
 	
-	@GetMapping("/login")
-	public String login(Model model, @RequestParam(name="error",required=false) String error,
-									@RequestParam(name="logout",required=false) String logout) {
-		model.addAttribute("error",error);
-		model.addAttribute("logout",logout);
-		return "redirect:/usuarios/login";
-	}
-	
-	@GetMapping("/logout")
-	public String logout(Model model) {
-		return "redirect:/usuarios/logout";
-	}
-	
-	@GetMapping("/loginsucces")
-	public String loginCheck() {
-		return "redirect:/home/index";
-	}
 }

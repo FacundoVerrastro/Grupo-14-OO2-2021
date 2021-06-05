@@ -32,64 +32,61 @@
 <table>
 		<thead>
 			<tr>
-				<th>nombre</th>
-				<th>apellido</th>
-				<th>tipoDocumento</th>
-				<th>numeroDocumento</th>
-				<th>email</th>
-				<th>nomUsuario</th>
-				<th>password</th>
-				<th>Tipo de Perfil</th>
+				<th>Pedido</th>
+				<th>Fecha</th>
+				<th>Desde</th>
+				<th>Hasta</th>
+				<th>Motivo</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="usuario :${usuarios}">
+			<tr th:each="permisoDiario :${permisosDiarios}">
 				
-				<td><span th:text="${usuario.nombre}" /></td>
-				<td><span th:text="${usuario.apellido}" /></td>
-				<td><span th:text="${usuario.tipoDocumento}" /></td>
-				<td><span th:text="${usuario.numeroDocumento}" /></td>
-				<td><span th:text="${usuario.email}" /></td>
-				<td><span th:text="${usuario.nomUsuario}" /></td>
-				<td><span th:text="${usuario.password}" /></td>
-				<td><span th:text="${usuario.perfil.tipo}" /></td>
-				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/usuarios/editar/} + ${usuario.idUsuario}">Editar</a></td>
-				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/usuarios/eliminarUsuario/} + ${usuario.idUsuario}">Eliminar</a></td>
 				
+				<td><span th:text="${permisoDiario.pedido.nombre}" /> <span th:text="${permisoDiario.pedido.apellido}" /></td>
+				<td><span th:text="${permisoDiario.fecha}" /></td>
+				<td th:each="i : ${lstLugares}" th:if="${permisoDiario.idPermiso == i.permisoDiario.idPermiso}"><span th:value="${i.lugar.lugar}" th:text="${i.lugar.lugar}+' '"></td>
+				<!--<td><span th:each="i : ${lstLugares}" th:text="${i.permisoDiario.idPermiso == permisoDiario.idPermiso}"></td>-->
+				<td><span th:text="${permisoDiario.motivo}" /></td>
+				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/permisos/editarPermisoDiario/} + ${permisoDiario.idPermiso}">Editar</a></td>
+				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/permisos/eliminarPermisoDiario/} + ${permisoDiario.idPermiso}">Eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
+	
 	<p>
-	  	<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	    	Agregar Usuario
+	  	<a class="btn btn-primary" type="button" data-bs-toggle="agregarPermisoDiario" data-bs-target="#agregarPermisoDiario" aria-expanded="false" aria-controls="collapseExample">
+	    	Agregar Permiso Diario
 	  	</a>
-	  	<a class="btn btn-primary" th:href="@{/usuarios/usuariosPdf/}">Descargar pdf</a>
 	</p>
-	<div class="collapse" id="collapseExample">
+	<div class="agregarPermisoDiario" id="agregarPermisoDiario">
   		<div class="card card-body">
-		<form action="#" th:action="@{/usuarios/}" th:object="${usuario}" method="post">
-		<p>nombre: <input type="text" th:field=" *{nombre}" /></p>
-		<p>Apellido: <input type="text" th:field="*{apellido}" />
-		<p>Tipo Documento:
-		<select class="form-control form-control-sm" th:field="*{tipoDocumento}">
-		 <option th:value="DNI">DNI</option>
-		 <option th:value="Pasaporte">Pasaporte</option>
-		 <option th:value="LC">LC</option>
-		</select>
-		</p>
-		<p>Numero de Documento: <input type="text" th:field=" *{numeroDocumento}" /></p>
-		<p>Email: <input type="text" th:field=" *{email}" /></p>
-		<p>Nombre de usuario: <input type="text" th:field=" *{nomUsuario}" /></p>
-		<p>Password: <input type="text" th:field=" *{password}" /></p>
-		<p>Perfil
-                            <select class="form-control form-control-sm" th:field="*{perfil.idPerfil}">
-                             <option th:each="i : ${lstPerfiles}" th:value="${i.idPerfil}" th:text="${i.tipo}">
+		<form action="#" th:action="@{/permisos/lugarPermisoDiario}" th:object="${permisoDiario} " method="post">
+		<p>Pedido Persona
+                            <select class="form-control form-control-sm" th:field="*{idPermiso}">
+                             <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}"/>
+                            </select>
                              </p>
+		
+		<p>Fecha <input type="date" th:field="*{fecha}" /></p>
+		
+		<p>Desde <select class="form-control form-control-sm" th:value="${desde}">
+                       <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
+                       </select></p>
+		
+		
+		<p>Hasta       <select class="form-control form-control-sm" th:value="${hasta}">             
+                       <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
+                       </select></p>
+		
+		<p>motivo <input type="text" th:field="*{motivo}" /></p>
                              </br>
+        </p>               
 		<input type="submit" />
 		</form>
 		</div>
 	</div>
+	
 	
 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
