@@ -23,6 +23,7 @@ import com.unla.Grupo14OO22021.entities.LugarPermisoDiario;
 import com.unla.Grupo14OO22021.entities.PermisoDiario;
 import com.unla.Grupo14OO22021.entities.PermisoPeriodo;
 import com.unla.Grupo14OO22021.entities.Usuario;
+import com.unla.Grupo14OO22021.models.LugarModel;
 import com.unla.Grupo14OO22021.models.LugarPermisoDiarioModel;
 import com.unla.Grupo14OO22021.models.PermisoDiarioModel;
 import com.unla.Grupo14OO22021.models.PermisoPeriodoModel;
@@ -97,6 +98,7 @@ public class PermisoDiarioController {
 		ModelAndView mAV = new ModelAndView("permiso/indexPermisoDiario");
 		mAV.addObject("permisosDiarios", permisoDiarioService.getAll());
 		mAV.addObject("permisoDiario", new PermisoDiarioModel());
+		mAV.addObject("lugarPermisoDiario", new LugarPermisoDiarioModel());
 		mAV.addObject("lstUsuarios",usuarioService.getAll());
 		mAV.addObject("lstLugares",lugarPermisoDiarioService.getAll());
 		mAV.addObject("lstAlllugares",lugarService.getAll());
@@ -120,16 +122,13 @@ public class PermisoDiarioController {
 	}
 	
 	
-//	@PostMapping("/permisos/getLugaresByPermiso")
-//	public List<Lugar> getLugaresByPermiso (@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiarioModel) {
-//		
-//		return permisoDiarioRepository.findBy;
-//	}
 	@PostMapping("/permisoDiario")
-	public RedirectView create (@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario,
-			@RequestParam("desde") String desde,
-			@RequestParam("hasta") String hasta) {
-		permisoDiarioService.insertOrUpdate(permisoDiario);
+	public RedirectView create (@ModelAttribute("lugarPermisoDiario") LugarPermisoDiarioModel lugarPermisoDiarioModel){
+		System.out.println(lugarPermisoDiarioModel.getIdLugarPermiso());
+		System.out.println(lugarPermisoDiarioModel.getPermisoDiario().getMotivo());
+		System.out.println(lugarPermisoDiarioModel.getPermisoDiario().getFecha());
+		System.out.println(lugarPermisoDiarioModel.getLugar().getLugar());
+		System.out.println(lugarPermisoDiarioModel.getLugar().getCodPostal());
 		return new RedirectView("/permisos/");
 	}
 	@PostMapping(value = "/editarUsuario/")

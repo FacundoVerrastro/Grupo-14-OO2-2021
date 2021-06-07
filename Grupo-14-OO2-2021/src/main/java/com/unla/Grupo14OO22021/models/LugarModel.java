@@ -4,6 +4,11 @@ public class LugarModel {
 	private int idLugar;
 	private String lugar;
 	private String codPostal;
+	
+	
+	public LugarModel() {
+		super();
+	}
 	public LugarModel(int idLugar, String lugar, String codPostal) {
 		super();
 		this.idLugar = idLugar;

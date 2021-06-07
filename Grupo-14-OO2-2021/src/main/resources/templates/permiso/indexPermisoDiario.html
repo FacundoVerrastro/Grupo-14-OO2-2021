@@ -61,25 +61,27 @@
 	</p>
 	<div class="agregarPermisoDiario" id="agregarPermisoDiario">
   		<div class="card card-body">
-		<form action="#" th:action="@{/permisos/lugarPermisoDiario}" th:object="${permisoDiario} " method="post">
+		<form action="#" th:action="@{/permisos/permisoDiario}" th:object="${lugarPermisoDiario} " method="post">
 		<p>Pedido Persona
-                            <select class="form-control form-control-sm" th:field="*{idPermiso}">
-                             <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}"/>
+                            <select class="form-control form-control-sm" th:field="*{permisoDiario.pedido.idUsuario}">
+                             <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.idUsuario}+' '+${i.nombre}+' '+ ${i.apellido}"/>
                             </select>
                              </p>
 		
-		<p>Fecha <input type="date" th:field="*{fecha}" /></p>
+		<p>Fecha <input type="date" th:field="*{permisoDiario.fecha}" /></p>
 		
-		<p>Desde <select class="form-control form-control-sm" th:value="${desde}">
+		<p>Desde <select class="form-control form-control-sm" th:field="*{lugar.lugar}">
                        <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
 		
-		
-		<p>Hasta       <select class="form-control form-control-sm" th:value="${hasta}">             
+		<p>Hasta       <select class="form-control form-control-sm" th:field="*{lugar.codPostal}">             
                        <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
-		
-		<p>motivo <input type="text" th:field="*{motivo}" /></p>
+          <!--             
+		<p>desde <input type="text" th:field="*{lugar.lugar}" /></p>
+		<p>hasta <input type="text" th:field="*{lugar.codPostal}" /></p>
+		-->
+		<p>motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>
                              </br>
         </p>               
 		<input type="submit" />
