@@ -3,10 +3,15 @@ package com.unla.Grupo14OO22021.entities;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,6 +19,14 @@ import javax.persistence.Table;
 @Table(name = "PermisoPeriodo")
 public class PermisoPeriodo extends Permiso {
 	
+
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JoinTable(
+			  name = "permiso_periodo_desde_hasta", 
+			  joinColumns = @JoinColumn(name = "permiso_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "lugar_id"))
+	private Set<Lugar> desdeHasta;
 	
 	@Column(name = "cantDias")
 	private int cantDias;

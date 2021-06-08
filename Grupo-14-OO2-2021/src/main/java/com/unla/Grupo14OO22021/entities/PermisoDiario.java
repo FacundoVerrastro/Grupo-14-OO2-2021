@@ -7,6 +7,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -15,9 +19,16 @@ import javax.persistence.Table;
 public class PermisoDiario extends Permiso{
 	
 
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JoinTable(
+			  name = "permiso_diario_desde_hasta", 
+			  joinColumns = @JoinColumn(name = "permiso_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "lugar_id"))
+	private Set<Lugar> desdeHasta;
+	
 	@Column(name = "motivo")
 	private String motivo;
-	
 	
 	
 	public PermisoDiario() {
@@ -35,6 +46,11 @@ public class PermisoDiario extends Permiso{
 		super(idPermiso, pedido, fecha);
 		this.motivo = motivo;
 	}
+	public PermisoDiario(int idPermiso, Usuario pedido, LocalDate fecha, String motivo,Set<Lugar> lugares) {
+		super(idPermiso, pedido, fecha);
+		this.motivo = motivo;
+//		this.lugares = lugares;
+	}
 
 
 
@@ -45,6 +61,17 @@ public class PermisoDiario extends Permiso{
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+	
+
+//	public Set<Lugar> getLugares() {
+//		return lugares;
+//	}
+//
+//
+//	public void setLugares(Set<Lugar> lugares) {
+//		this.lugares = lugares;
+//	}
+
 
 	@Override
 	public String toString() {

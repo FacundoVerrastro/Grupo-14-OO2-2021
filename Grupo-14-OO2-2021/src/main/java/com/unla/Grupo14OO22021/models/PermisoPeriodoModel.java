@@ -1,7 +1,6 @@
 package com.unla.Grupo14OO22021.models;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 public class PermisoPeriodoModel extends PermisoModel {
 	private int cantDias;

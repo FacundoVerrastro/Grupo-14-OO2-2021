@@ -1,14 +1,9 @@
 package com.unla.Grupo14OO22021.converters;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.unla.Grupo14OO22021.entities.Lugar;
 import com.unla.Grupo14OO22021.entities.PermisoPeriodo;
-import com.unla.Grupo14OO22021.models.LugarModel;
 import com.unla.Grupo14OO22021.models.PermisoPeriodoModel;
 
 @Component("permisoPeriodoConverter")

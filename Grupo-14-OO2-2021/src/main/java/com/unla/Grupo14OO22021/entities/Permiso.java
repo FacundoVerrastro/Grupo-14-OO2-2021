@@ -1,9 +1,7 @@
 package com.unla.Grupo14OO22021.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 
 @MappedSuperclass
 public class Permiso {
@@ -27,7 +24,7 @@ public class Permiso {
 
 	    @Column(name = "fecha")
 	    protected LocalDate fecha;
-	    
+		
 		public Permiso() {
 			super();
 		}

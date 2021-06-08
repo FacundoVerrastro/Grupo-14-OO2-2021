@@ -55,11 +55,11 @@
 	</table>
 	
 	<p>
-	  	<a class="btn btn-primary" type="button" data-bs-toggle="agregarPermisoDiario" data-bs-target="#agregarPermisoDiario" aria-expanded="false" aria-controls="collapseExample">
+	  	<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 	    	Agregar Permiso Diario
 	  	</a>
 	</p>
-	<div class="agregarPermisoDiario" id="agregarPermisoDiario">
+	<div class="collapse" id="collapseExample">
   		<div class="card card-body">
 		<form action="#" th:action="@{/permisos/permisoDiario}" th:object="${lugarPermisoDiario} " method="post">
 		<p>Pedido Persona
@@ -77,11 +77,8 @@
 		<p>Hasta       <select class="form-control form-control-sm" th:field="*{lugar.codPostal}">             
                        <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
-          <!--             
-		<p>desde <input type="text" th:field="*{lugar.lugar}" /></p>
-		<p>hasta <input type="text" th:field="*{lugar.codPostal}" /></p>
-		-->
-		<p>motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>
+        
+		<p>Motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>
                              </br>
         </p>               
 		<input type="submit" />

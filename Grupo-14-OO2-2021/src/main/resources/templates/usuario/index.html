@@ -68,7 +68,7 @@
 	<div class="collapse" id="collapseExample">
   		<div class="card card-body">
 		<form action="#" th:action="@{/usuarios/}" th:object="${usuario}" method="post">
-		<p>nombre: <input type="text" th:field=" *{nombre}" /></p>
+		<p>Nombre: <input type="text" th:field=" *{nombre}" /></p>
 		<p>Apellido: <input type="text" th:field="*{apellido}" />
 		<p>Tipo Documento:
 		<select class="form-control form-control-sm" th:field="*{tipoDocumento}">
