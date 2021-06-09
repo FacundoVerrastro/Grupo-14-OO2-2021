@@ -63,7 +63,7 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	}
 	
 	public User buildUsuario(Usuario usuario, List<GrantedAuthority> grantedAuthorities) {
-		return new User(usuario.getNomUsuario(),usuario.getPassword(),true,true,true,true,grantedAuthorities);
+		return new User(usuario.getUsername(),usuario.getPassword(),true,true,true,true,grantedAuthorities);
 	}
 	
 	private List<GrantedAuthority> buildGrantedAuthorities(Perfil perfil) {

@@ -25,14 +25,38 @@ public class Usuario {
 	@Column(name="tipoDocumento", nullable=false)
     private String tipoDocumento;
 	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+
+
 	@Column(name="numeroDocumento", nullable=false)
     private int numeroDocumento;
 	
 	@Column(name="email", nullable=false)
     private String email;
 	
-	@Column(name="nomUsuario",unique=true, nullable=false)
-    private String nomUsuario;
+	@Column(name="username",unique=true, nullable=false)
+    private String username;
 	
 	@Column(name="password", nullable=false)
     private String password;
@@ -61,7 +85,7 @@ public class Usuario {
 
 
 	public Usuario(int idUsuario, String nombre, String apellido, String tipoDocumento, int numeroDocumento,
-			String email, String nomUsuario, String password, Perfil perfil) {
+			String email, String username, String password, Perfil perfil) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -69,7 +93,7 @@ public class Usuario {
 		this.tipoDocumento = tipoDocumento;
 		this.numeroDocumento = numeroDocumento;
 		this.email = email;
-		this.nomUsuario = nomUsuario;
+		this.username = username;
 		this.password = password;
 		this.perfil = perfil;
 	}
@@ -148,14 +172,16 @@ public class Usuario {
 
 
 
-	public String getNomUsuario() {
-		return nomUsuario;
+
+
+	public String getUsername() {
+		return username;
 	}
 
 
 
-	public void setNomUsuario(String nomUsuario) {
-		this.nomUsuario = nomUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -200,7 +226,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento="
 				+ tipoDocumento + ", numeroDocumento=" + numeroDocumento + ", email=" + email + ", nomUsuario="
-				+ nomUsuario + ", password=" + password + ", enabled=" + enabled + ", createdAt=" + createdAt
+				+ username + ", password=" + password + ", enabled=" + enabled + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + ", perfil=" + perfil + "]";
 	}
 	

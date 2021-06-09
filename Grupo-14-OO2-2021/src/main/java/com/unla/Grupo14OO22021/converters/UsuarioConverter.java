@@ -13,7 +13,7 @@ public class UsuarioConverter {
 	public UsuarioModel entityToModel(Usuario usuario) {
 		return new UsuarioModel(usuario.getIdUsuario(),usuario.getNombre(),
 				usuario.getApellido(),usuario.getTipoDocumento(),usuario.getNumeroDocumento(),
-				usuario.getEmail(),usuario.getNomUsuario(),usuario.getPassword());
+				usuario.getEmail(),usuario.getUsername(),usuario.getPassword());
 	}
 	
 	public Usuario modelToEntity(UsuarioModel usuarioModel) {

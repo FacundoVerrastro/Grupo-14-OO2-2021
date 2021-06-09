@@ -66,7 +66,7 @@ public class UsuariosPDFExporter {
             table.addCell(usuario.getTipoDocumento());
             table.addCell(String.valueOf(usuario.getNumeroDocumento()));
             table.addCell(usuario.getEmail());
-            table.addCell(usuario.getNomUsuario());
+            table.addCell(usuario.getUsername());
             table.addCell(usuario.getPassword());
             table.addCell(usuario.getPerfil().getTipo());
         }
