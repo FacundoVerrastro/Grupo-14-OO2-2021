@@ -3,6 +3,7 @@ package com.unla.Grupo14OO22021.entities;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +37,10 @@ public class Lugar {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToMany(mappedBy = "desdeHasta")
+	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.ALL)
     Set<PermisoDiario> permisosDiario;
 	
-	@ManyToMany(mappedBy = "desdeHasta")
+	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.ALL)
     Set<PermisoPeriodo> permisosPeriodo;
 	
 	public Lugar() {
@@ -79,6 +80,23 @@ public class Lugar {
 
 	public String getCodigoPostal() {
 		return codigoPostal;
+	}
+
+	
+	public Set<PermisoDiario> getPermisosDiario() {
+		return permisosDiario;
+	}
+
+	public void setPermisosDiario(Set<PermisoDiario> permisosDiario) {
+		this.permisosDiario = permisosDiario;
+	}
+
+	public Set<PermisoPeriodo> getPermisosPeriodo() {
+		return permisosPeriodo;
+	}
+
+	public void setPermisosPeriodo(Set<PermisoPeriodo> permisosPeriodo) {
+		this.permisosPeriodo = permisosPeriodo;
 	}
 
 	public void setCodigoPostal(String codigoPostal) {

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class PermisoPeriodo extends Permiso {
 	
 
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JoinTable(
 			  name = "permiso_periodo_desde_hasta", 

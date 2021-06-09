@@ -45,8 +45,7 @@
 				
 				<td><span th:text="${permisoDiario.pedido.nombre}" /> <span th:text="${permisoDiario.pedido.apellido}" /></td>
 				<td><span th:text="${permisoDiario.fecha}" /></td>
-				<td th:each="i : ${lstLugares}" th:if="${permisoDiario.idPermiso == i.permisoDiario.idPermiso}"><span th:value="${i.lugar.lugar}" th:text="${i.lugar.lugar}+' '"></td>
-				<!--<td><span th:each="i : ${lstLugares}" th:text="${i.permisoDiario.idPermiso == permisoDiario.idPermiso}"></td>-->
+				<td th:each="i : ${permisoDiario.desdeHasta}"><span th:value="${i.lugar}" th:text="${i.lugar}+' '"></td>
 				<td><span th:text="${permisoDiario.motivo}" /></td>
 				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/permisos/editarPermisoDiario/} + ${permisoDiario.idPermiso}">Editar</a></td>
 				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/permisos/eliminarPermisoDiario/} + ${permisoDiario.idPermiso}">Eliminar</a></td>
@@ -63,19 +62,19 @@
   		<div class="card card-body">
 		<form action="#" th:action="@{/permisos/permisoDiario}" th:object="${lugarPermisoDiario} " method="post">
 		<p>Pedido Persona
-                            <select class="form-control form-control-sm" th:field="*{permisoDiario.pedido.idUsuario}">
+                            <select class="form-control form-control-sm" th:field="*{idPedido}">
                              <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.idUsuario}+' '+${i.nombre}+' '+ ${i.apellido}"/>
                             </select>
                              </p>
 		
 		<p>Fecha <input type="date" th:field="*{permisoDiario.fecha}" /></p>
 		
-		<p>Desde <select class="form-control form-control-sm" th:field="*{lugar.lugar}">
-                       <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
+		<p>Desde <select class="form-control form-control-sm" th:field="*{idLugarDesde}">
+                       <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
 		
-		<p>Hasta       <select class="form-control form-control-sm" th:field="*{lugar.codPostal}">             
-                       <option th:each="i : ${lstAlllugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
+		<p>Hasta       <select class="form-control form-control-sm" th:field="*{idLugarHasta}">             
+                       <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
         
 		<p>Motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>

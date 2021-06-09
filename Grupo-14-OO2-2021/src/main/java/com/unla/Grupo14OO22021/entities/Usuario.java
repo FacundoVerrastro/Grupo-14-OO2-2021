@@ -202,6 +202,4 @@ public class Usuario {
 				+ ", updatedAt=" + updatedAt + ", perfil=" + perfil + "]";
 	}
 	
-	
-	
 }

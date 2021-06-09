@@ -3,36 +3,21 @@ package com.unla.Grupo14OO22021.models;
 
 public class LugarPermisoPeriodoModel {
 	
-	private int idLugarPeriodo;
+	private PermisoPeriodoModel permisoPeriodo;
 	
-    private LugarModel lugar;
+    private int idLugarDesde;
 
-    private PermisoPeriodoModel permisoPeriodo;
+    private int idLugarHasta;
 
 	public LugarPermisoPeriodoModel() {
 		super();
 	}
 
-	public LugarPermisoPeriodoModel(LugarModel lugar, PermisoPeriodoModel permisoPeriodo) {
+	public LugarPermisoPeriodoModel(PermisoPeriodoModel permisoPeriodo, int idLugarDesde, int idLugarHasta) {
 		super();
-		this.lugar = lugar;
 		this.permisoPeriodo = permisoPeriodo;
-	}
-
-	public int getIdLugarPeriodo() {
-		return idLugarPeriodo;
-	}
-
-	public void setIdLugarPeriodo(int idLugarPeriodo) {
-		this.idLugarPeriodo = idLugarPeriodo;
-	}
-
-	public LugarModel getLugar() {
-		return lugar;
-	}
-
-	public void setLugar(LugarModel lugar) {
-		this.lugar = lugar;
+		this.idLugarDesde = idLugarDesde;
+		this.idLugarHasta = idLugarHasta;
 	}
 
 	public PermisoPeriodoModel getPermisoPeriodo() {
@@ -42,6 +27,22 @@ public class LugarPermisoPeriodoModel {
 	public void setPermisoPeriodo(PermisoPeriodoModel permisoPeriodo) {
 		this.permisoPeriodo = permisoPeriodo;
 	}
-	
+
+	public int getIdLugarDesde() {
+		return idLugarDesde;
+	}
+
+	public void setIdLugarDesde(int idLugarDesde) {
+		this.idLugarDesde = idLugarDesde;
+	}
+
+	public int getIdLugarHasta() {
+		return idLugarHasta;
+	}
+
+	public void setIdLugarHasta(int idLugarHasta) {
+		this.idLugarHasta = idLugarHasta;
+	}
+
 	
 }
