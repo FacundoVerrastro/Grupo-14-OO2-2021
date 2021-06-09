@@ -1,5 +1,6 @@
 package com.unla.Grupo14OO22021.services.implementation;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +49,7 @@ public class PermisoDiarioService implements IPermisoDiarioService{
 		newPermisoDiarioModel.setFecha(permisoDiarioModel.getFecha());
 		newPermisoDiarioModel.setMotivo(permisoDiarioModel.getMotivo());
 		newPermisoDiarioModel.setPedido(permisoDiarioModel.getPedido());
+		newPermisoDiarioModel.setDesdeHasta(new HashSet<LugarModel>());
 		newPermisoDiarioModel.getDesdeHasta().
 			addAll(permisoDiarioModel.getDesdeHasta()
 					.stream()

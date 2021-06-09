@@ -1,11 +1,8 @@
 package com.unla.Grupo14OO22021.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-import com.unla.Grupo14OO22021.entities.Lugar;
 
 
 public class PermisoDiarioModel extends PermisoModel {

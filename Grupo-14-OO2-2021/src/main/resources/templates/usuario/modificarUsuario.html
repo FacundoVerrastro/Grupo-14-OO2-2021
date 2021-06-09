@@ -23,12 +23,19 @@
                             <li class="nav-item"><a class="nav-link" href="http://localhost:8080/usuarios/">Usuarios</a></li>
                             <li class="nav-item"><a class="nav-link" href="http://localhost:8080/perfiles/">Perfiles</a></li>
                             <li class="nav-item"><a class="nav-link" href="http://localhost:8080/rodados/">Rodados</a></li>
-                            <li class="nav-item"><a class="nav-link" href="http://localhost:8080/permisos/">Permisos</a></li>
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Permisos</a>
+	                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						            <li><a class="dropdown-item" href="http://localhost:8080/permisos/permisosDiarios">Diarios</a></li>
+						            <li><a class="dropdown-item" href="http://localhost:8080/permisos/permisosPeriodos">Periodo</a></li>
+          						</ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </main>
+        
 	<form action="#" th:action="@{/usuarios/editarUsuario/}" th:object="${usuario}" method="post">
 		<input type="hidden" th:field=" *{idUsuario}"/>
 		<p>nombre: <input type="text" th:field=" *{nombre}"/></p>

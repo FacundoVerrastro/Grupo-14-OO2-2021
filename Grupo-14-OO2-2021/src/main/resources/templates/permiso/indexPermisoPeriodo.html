@@ -42,50 +42,53 @@
 				<th>Fecha</th>
 				<th>Desde</th>
 				<th>Hasta</th>
-				<th>Motivo</th>
+				<th>Cantidad de dias</th>
+				<th>Vacaciones</th>
+				<th>Rodado usado</th>
 				<th>Valido</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="permisoDiario :${permisosDiarios}">
-				
-				
-				<td><span th:text="${permisoDiario.pedido.nombre}" /> <span th:text="${permisoDiario.pedido.apellido}" /></td>
-				<td><span th:text="${permisoDiario.fecha}" /></td>
-				<td th:each="i : ${permisoDiario.desdeHasta}"><span th:value="${i.lugar}" th:text="${i.lugar}+' '"></td>
-				<td><span th:text="${permisoDiario.motivo}" /></td>
-				<td><span th:if="${permisoDiario.fecha}==${fechaActual}">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-				  		<path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
-						</svg>	
-					</span>
-					<span th:unless="${permisoDiario.fecha}==${fechaActual}">
+			<tr th:each="permisoPeriodo :${permisosPeriodos}">
+				<td><span th:text="${permisoPeriodo.pedido.nombre}" /> <span th:text="${permisoPeriodo.pedido.apellido}" /></td>
+				<td><span th:text="${permisoPeriodo.fecha}" /></td>
+				<td th:each="i : ${permisoPeriodo.desdeHasta}"><span th:value="${i.lugar}" th:text="${i.lugar}+' '"></td>
+				<td><span th:text="${permisoPeriodo.cantDias}" /></td>
+				<td><span th:if="${permisoPeriodo.vacaciones}">Si</span> <span th:unless="${permisoPeriodo.vacaciones}">No</span></td>
+				<td><span th:text="${permisoPeriodo.rodado.dominio}" /></td>
+				<td><span th:if="${fechaActual&lt;permisoPeriodo.fecha OR fechaActual&gt;permisoPeriodo.fecha.plusDays(permisoPeriodo.cantDias)}">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
 	  					<path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
 						</svg>
 					</span>
-				</td>
-				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/permisos/editarPermisoDiario/} + ${permisoDiario.idPermiso}">Editar</a></td>
-				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/permisos/eliminarPermisoDiario/} + ${permisoDiario.idPermiso}">Eliminar</a></td>
+					<span th:unless="${fechaActual&lt;permisoPeriodo.fecha OR fechaActual&gt;permisoPeriodo.fecha.plusDays(permisoPeriodo.cantDias)}">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+				  		<path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+						</svg>
+					</span>
+					</td>
+				
+				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/permisos/editarPermisoPeriodo/} + ${permisoPeriodo.idPermiso}">Editar</a></td>
+				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/permisos/eliminarPermisoPeriodo/} + ${permisoPeriodo.idPermiso}">Eliminar</a></td>
 			</tr>
 		</tbody>
 	</table>
 	
 	<p>
 	  	<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	    	Agregar Permiso Diario
+	    	Agregar Permiso Periodo
 	  	</a>
 	</p>
 	<div class="collapse" id="collapseExample">
   		<div class="card card-body">
-		<form action="#" th:action="@{/permisos/permisoDiario}" th:object="${lugarPermisoDiario} " method="post">
+		<form action="#" th:action="@{/permisos/permisoPeriodo/}" th:object="${lugarPermisoPeriodo} " method="post">
 		<p>Pedido Persona
                             <select class="form-control form-control-sm" th:field="*{idPedido}">
                              <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}"/>
                             </select>
                              </p>
 		
-		<p>Fecha <input type="date" th:field="*{permisoDiario.fecha}" /></p>
+		<p>Fecha <input type="date" th:field="*{permisoPeriodo.fecha}" /></p>
 		
 		<p>Desde <select class="form-control form-control-sm" th:field="*{idLugarDesde}">
                        <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
@@ -95,7 +98,19 @@
                        <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
                        </select></p>
         
-		<p>Motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>
+		<p>Cantidad de dias <input type="text" th:field="*{permisoPeriodo.cantDias}" /></p>
+		<p>Vacaciones
+						<select class="form-control form-control-sm" th:field="*{permisoPeriodo.vacaciones}">             
+                       	<option th:value="true" th:text="Si"/>
+                       	<option th:value="false" th:text="No"/>
+                       	</select></p>
+		</p>
+		<p>Rodado
+			 <select class="form-control form-control-sm" th:field="*{idRodado}">
+          	 <option th:each="i : ${lstRodados}" th:value="${i.idRodado}" th:text="${i.vehiculo}+' '+ ${i.dominio}"/>
+          	 </select>
+		</p>
+		
                              </br>
         </p>               
 		<input type="submit" />

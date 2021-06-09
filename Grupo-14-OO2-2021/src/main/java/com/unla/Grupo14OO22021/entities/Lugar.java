@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -20,7 +18,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Lugar {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idLugar;
 	
 	@Column (name= "lugar", nullable = false)
@@ -37,10 +34,10 @@ public class Lugar {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.MERGE)
     Set<PermisoDiario> permisosDiario;
 	
-	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "desdeHasta", cascade = CascadeType.MERGE)
     Set<PermisoPeriodo> permisosPeriodo;
 	
 	public Lugar() {
