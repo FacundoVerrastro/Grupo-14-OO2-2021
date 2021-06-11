@@ -13,7 +13,7 @@ import com.unla.Grupo14OO22021.repositories.IUsuarioRepository;
 import com.unla.Grupo14OO22021.services.IUsuarioService;
 
 @Service("usuarioService")
-public class UsuarioService implements IUsuarioService{
+public class UsuarioService implements IUsuarioService {
 	
 	@Autowired
 	@Qualifier("usuarioRepository")

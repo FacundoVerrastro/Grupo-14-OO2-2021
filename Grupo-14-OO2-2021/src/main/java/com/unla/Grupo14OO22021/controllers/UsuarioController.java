@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,9 +62,6 @@ public class UsuarioController {
 
 	@GetMapping(value="/editar/{id}")
 	public String modificarUsuario(@PathVariable int id,Model model) {
-//		ModelAndView mAV = new ModelAndView("usuario/modificarUsuario");
-//		mAV.addObject("usuarios", usuarioRepository.findById(id));
-//		mAV.addObject("usuario", usuarioConverter.entityToModel(usuarioRepository.findById(id).orElse(null)));
 		model.addAttribute(usuarioRepository.findById(id).orElse(null));
 		model.addAttribute("lstPerfiles",perfilService.getAll());
 		return "usuario/modificarUsuario";

@@ -38,60 +38,31 @@
 <table>
 		<thead>
 			<tr>
-				<th>nombre</th>
-				<th>apellido</th>
-				<th>tipoDocumento</th>
-				<th>numeroDocumento</th>
-				<th>email</th>
-				<th>nomUsuario</th>
-				<th>password</th>
-				<th>Tipo de Perfil</th>
+				<th>dominio</th>
+				<th>vehiculo</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="usuario :${usuarios}">
+			<tr th:each="rodado :${rodados}">
 				
-				<td><span th:text="${usuario.nombre}" /></td>
-				<td><span th:text="${usuario.apellido}" /></td>
-				<td><span th:text="${usuario.tipoDocumento}" /></td>
-				<td><span th:text="${usuario.numeroDocumento}" /></td>
-				<td><span th:text="${usuario.email}" /></td>
-				<td><span th:text="${usuario.nomUsuario}" /></td>
-				<td><span th:text="${usuario.password}" /></td>
-				<td><span th:text="${usuario.perfil.tipo}" /></td>
-				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/usuarios/editar/} + ${usuario.idUsuario}">Editar</a></td>
-				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/usuarios/eliminarUsuario/} + ${usuario.idUsuario}">Eliminar</a></td>
+				<td><span th:text="${rodado.dominio}" /></td>
+				<td><span th:text="${rodado.vehiculo}" /></td>
+				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/rodados/editar/} + ${rodado.idRodado}">Editar</a></td>
+				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/rodados/eliminarRodado/} + ${rodado.idRodado}">Eliminar</a></td>
 				
 			</tr>
 		</tbody>
 	</table>
 	<p>
 	  	<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	    	Agregar Usuario
+	    	Agregar Rodado
 	  	</a>
-	  	<a class="btn btn-primary" th:href="@{/usuarios/usuariosPdf/}">Descargar pdf</a>
 	</p>
 	<div class="collapse" id="collapseExample">
   		<div class="card card-body">
-		<form action="#" th:action="@{/usuarios/}" th:object="${usuario}" method="post">
-		<p>Nombre: <input type="text" th:field=" *{nombre}" /></p>
-		<p>Apellido: <input type="text" th:field="*{apellido}" />
-		<p>Tipo Documento:
-		<select class="form-control form-control-sm" th:field="*{tipoDocumento}">
-		 <option th:value="DNI">DNI</option>
-		 <option th:value="Pasaporte">Pasaporte</option>
-		 <option th:value="LC">LC</option>
-		</select>
-		</p>
-		<p>Numero de Documento: <input type="text" th:field=" *{numeroDocumento}" /></p>
-		<p>Email: <input type="text" th:field=" *{email}" /></p>
-		<p>Nombre de usuario: <input type="text" th:field=" *{nomUsuario}" /></p>
-		<p>Password: <input type="text" th:field=" *{password}" /></p>
-		<p>Perfil
-                            <select class="form-control form-control-sm" th:field="*{perfil.idPerfil}">
-                             <option th:each="i : ${lstPerfiles}" th:value="${i.idPerfil}" th:text="${i.tipo}">
-                             </p>
-                             </br>
+		<form action="#" th:action="@{/rodados/}" th:object="${rodado}" method="post">
+		<p>dominio: <input type="text" th:field=" *{dominio}" /></p>
+		<p>vehiculo: <input type="text" th:field="*{vehiculo}" />
 		<input type="submit" />
 		</form>
 		</div>
