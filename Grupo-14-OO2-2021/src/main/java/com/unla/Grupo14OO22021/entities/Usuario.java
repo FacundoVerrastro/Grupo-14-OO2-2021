@@ -49,7 +49,7 @@ public class Usuario {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToOne (fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+	@ManyToOne (fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
 	@JoinColumn (name="idPerfil", nullable=false)
     private Perfil perfil;
 	

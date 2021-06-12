@@ -13,9 +13,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Perfil {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idPerfil;
 	
-	@Column (name= "tipo", nullable = false)
+	@Column (name= "tipo")
 	private String tipo;
 	
 	@Column(name="createdat")

@@ -23,9 +23,12 @@ import com.unla.Grupo14OO22021.converters.UsuarioConverter;
 import com.unla.Grupo14OO22021.entities.Lugar;
 import com.unla.Grupo14OO22021.entities.Rodado;
 import com.unla.Grupo14OO22021.entities.Usuario;
+import com.unla.Grupo14OO22021.models.FiltroModel;
 import com.unla.Grupo14OO22021.models.LugarModel;
 import com.unla.Grupo14OO22021.models.LugarPermisoPeriodoModel;
+import com.unla.Grupo14OO22021.models.PermisoDiarioModel;
 import com.unla.Grupo14OO22021.models.PermisoPeriodoModel;
+import com.unla.Grupo14OO22021.models.UsuarioModel;
 import com.unla.Grupo14OO22021.repositories.ILugarRepository;
 import com.unla.Grupo14OO22021.repositories.IPerfilRepository;
 import com.unla.Grupo14OO22021.repositories.IPermisoPeriodoRepository;
@@ -109,6 +112,9 @@ public class PermisoPeriodoController {
 		
 		//Usado para validar el permiso
 		mAV.addObject("fechaActual",LocalDate.now());
+		
+		//Usado para los filtros
+		mAV.addObject("filtro", new FiltroModel());
 				
 		return mAV;
 	}
@@ -117,6 +123,7 @@ public class PermisoPeriodoController {
 	public String modificarPermisoPeriodo(@PathVariable int id,Model model) {
 		
 		LugarPermisoPeriodoModel lugarPermisoPeriodo = new LugarPermisoPeriodoModel();
+		lugarPermisoPeriodo.setPermisoPeriodo(permisoPeriodoConverter.entityToModel(permisoPeriodoRepository.findById(id).orElse(null)));
 		lugarPermisoPeriodo.setIdPermisoPeriodo(permisoPeriodoRepository.findById(id).orElse(null).getIdPermiso());
 		
 		
@@ -132,6 +139,102 @@ public class PermisoPeriodoController {
 	public String eliminarPermisoPeriodo(@PathVariable int id) {
 		permisoPeriodoService.remove(id);
 		return "redirect:/permisos/permisosPeriodos";
+	}
+	
+	@GetMapping(value = "traerPorPersonaPeriodo/{idPersona}")
+	public String traerPorPersonaPeriodo(@PathVariable int idPersona,Model model) {
+		model.addAttribute("permisosPeriodos",permisoPeriodoRepository.findByIdUsuario(idPersona));
+		model.addAttribute("permisoPeriodo", new PermisoPeriodoModel());
+		
+		model.addAttribute("lstRodados", rodadoService.getAll());
+		model.addAttribute("lstAllLugares",lugarService.getAll());
+		
+		//Usado para validar el permiso
+		model.addAttribute("fechaActual",LocalDate.now());
+		model.addAttribute("checkActivates", false);
+		
+		//Usado para el traer por persona
+		model.addAttribute("lstUsuarios",usuarioService.getAll());
+		model.addAttribute("persona", new UsuarioModel());
+		
+		//Usado para los filtros
+		model.addAttribute("filtro", new FiltroModel());
+		
+		return "permiso/traerPermisoPeriodo";
+	}
+
+	@GetMapping(value = "traerPorRodado/{idRodado}")
+	public String traerPorRodado(@PathVariable int idRodado,Model model) {
+		model.addAttribute("permisosPeriodos",permisoPeriodoRepository.findByRodado(rodadoRepository.findById(idRodado).orElse(null)));
+		model.addAttribute("permisoPeriodo", new PermisoPeriodoModel());
+		
+		model.addAttribute("lstRodados", rodadoService.getAll());
+		model.addAttribute("lstAllLugares",lugarService.getAll());
+		
+		//Usado para validar el permiso
+		model.addAttribute("fechaActual",LocalDate.now());
+		model.addAttribute("checkActivates", false);
+		
+		//Usado para el traer por persona
+		model.addAttribute("lstUsuarios",usuarioService.getAll());
+		model.addAttribute("persona", new UsuarioModel());
+		
+		//Usado para los filtros
+		model.addAttribute("filtro", new FiltroModel());
+		
+		return "permiso/traerPermisoPeriodo";
+	}
+	@GetMapping(value = "traerEntreFechasPeriodo/{primeraFecha}&{segundaFecha}")
+	public String traerEntreFechasPeriodo(@PathVariable String primeraFecha,@PathVariable String segundaFecha,Model model) {
+		LocalDate primeraFechaAux = LocalDate.parse(primeraFecha);
+		LocalDate segundaFechaAux = LocalDate.parse(segundaFecha);
+		model.addAttribute("permisosPeriodos",permisoPeriodoRepository.findBetweenDates(primeraFechaAux, segundaFechaAux));
+		model.addAttribute("permisoPeriodo", new PermisoDiarioModel());
+		
+		model.addAttribute("lstRodados", rodadoService.getAll());
+		model.addAttribute("lstAllLugares",lugarService.getAll());
+		
+		FiltroModel filtro = new FiltroModel();
+		model.addAttribute("filtro",filtro);
+		
+		//Usado para validar el permiso
+		model.addAttribute("fechaActual",LocalDate.now());
+		model.addAttribute("checkActivates", true);
+		
+		//Usado para el traer por persona
+		model.addAttribute("lstUsuarios",usuarioService.getAll());
+		model.addAttribute("persona", new UsuarioModel());
+		
+		//Usado para los filtros
+		model.addAttribute("filtro", new FiltroModel());
+		return "permiso/traerPermisoPeriodo";
+	}
+	
+	@GetMapping(value = "traerEntreFechasYLugarPeriodo/{primeraFecha}&{segundaFecha}&{idLugar}")
+	public String traerEntreFechasYLugarPeriodo(@PathVariable String primeraFecha,@PathVariable String segundaFecha,@PathVariable int idLugar,Model model) {
+		LocalDate primeraFechaAux = LocalDate.parse(primeraFecha);
+		LocalDate segundaFechaAux = LocalDate.parse(segundaFecha);
+		
+		model.addAttribute("permisosPeriodos",permisoPeriodoRepository.findBetweenDatesAndPlace(primeraFechaAux, segundaFechaAux,lugarRepository.findByIdLugar(idLugar)));
+		model.addAttribute("permisoPeriodo", new PermisoPeriodoModel());
+		
+		FiltroModel filtro = new FiltroModel();
+		model.addAttribute("filtro",filtro);
+		
+		model.addAttribute("lstRodados", rodadoService.getAll());
+		model.addAttribute("lstAllLugares",lugarService.getAll());
+		
+		//Usado para validar el permiso
+		model.addAttribute("fechaActual",LocalDate.now());
+		model.addAttribute("checkActivates", true);
+		
+		//Usado para el traer por persona
+		model.addAttribute("lstUsuarios",usuarioService.getAll());
+		model.addAttribute("persona", new UsuarioModel());
+		
+		//Usado para los filtros
+		model.addAttribute("filtro", new FiltroModel());
+		return "permiso/traerPermisoPeriodo";
 	}
 	
 	@PostMapping("/permisoPeriodo/")
@@ -179,5 +282,22 @@ public class PermisoPeriodoController {
 		permisoPeriodoRepository.saveAndFlush(permisoPeriodoConverter.modelToEntity(permisoPeriodo));
 		
 		return "redirect:/permisos/permisosPeriodos";
+	}
+	
+	@PostMapping(value = "/buscarPorPersonaPeriodo/")
+	public String buscarPorPersonaPeriodo(@ModelAttribute("filtro") FiltroModel filtroModel) {
+		return "redirect:/permisos/traerPorPersonaPeriodo/"+filtroModel.getIdUsuario();
+	}
+	@PostMapping(value = "/buscarPorRodado/")
+	public String buscarPorRodado(@ModelAttribute("filtro") FiltroModel filtroModel) {
+		return "redirect:/permisos/traerPorRodado/"+filtroModel.getIdRodado();
+	}
+	@PostMapping(value = "/buscarEntreFechasPeriodo")
+	public String buscarEntreFechasPeriodo(@ModelAttribute("filtro") FiltroModel filtroModel ) {
+		return "redirect:/permisos/traerEntreFechasPeriodo/"+filtroModel.getPrimeraFecha()+"&"+filtroModel.getSegundaFecha();
+	}
+	@PostMapping(value = "/buscarEntreFechasYLugarPeriodo")
+	public String buscarEntreFechasYLugarPeriodo(@ModelAttribute("filtro") FiltroModel filtroModel ) {
+		return "redirect:/permisos/traerEntreFechasYLugarPeriodo/"+filtroModel.getPrimeraFecha()+"&"+filtroModel.getSegundaFecha()+"&"+filtroModel.getIdLugarDeterminado();
 	}
 }

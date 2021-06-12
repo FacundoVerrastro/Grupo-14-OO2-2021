@@ -38,7 +38,7 @@ public class RodadoController {
 	}
 	@GetMapping(value="/editar/{id}")
 	public String modificarRodado(@PathVariable int id,Model model) {
-		model.addAttribute(rodadoRepository.findById(id).orElse(null));
+		model.addAttribute("rodado",rodadoRepository.findById(id).orElse(null));
 		return "rodado/modificarRodado";
 	}
 	

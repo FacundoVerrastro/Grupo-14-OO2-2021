@@ -1,14 +1,10 @@
 package com.unla.Grupo14OO22021.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -111,6 +106,7 @@ public class PermisoDiarioController {
 	public String modificarPermisoDiario(@PathVariable int id,Model model) {
 		
 		LugarPermisoDiarioModel lugarPermisoDiario = new LugarPermisoDiarioModel();
+		lugarPermisoDiario.setPermisoDiario(permisoDiarioConverter.entityToModel(permisoDiarioRepository.findById(id).orElse(null)));
 		lugarPermisoDiario.setIdPermisoDiario(permisoDiarioRepository.findById(id).orElse(null).getIdPermiso());
 		model.addAttribute("lugarPermisoDiario",lugarPermisoDiario);
 		model.addAttribute("lstUsuarios",usuarioService.getAll());
@@ -129,6 +125,8 @@ public class PermisoDiarioController {
 	public String traerPorPersona(@PathVariable int idPersona,Model model) {
 		model.addAttribute("permisosDiarios",permisoDiarioRepository.findByIdUsuario(idPersona));
 		model.addAttribute("permisoDiario", new PermisoDiarioModel());
+		
+		model.addAttribute("lstAllLugares",lugarService.getAll());
 		
 		//Usado para validar el permiso
 		model.addAttribute("fechaActual",LocalDate.now());
@@ -150,6 +148,8 @@ public class PermisoDiarioController {
 		LocalDate segundaFechaAux = LocalDate.parse(segundaFecha);
 		model.addAttribute("permisosDiarios",permisoDiarioRepository.findBetweenDates(primeraFechaAux, segundaFechaAux));
 		model.addAttribute("permisoDiario", new PermisoDiarioModel());
+		
+		model.addAttribute("lstAllLugares",lugarService.getAll());
 		
 		FiltroModel filtro = new FiltroModel();
 		model.addAttribute("filtro",filtro);
@@ -175,6 +175,8 @@ public class PermisoDiarioController {
 		
 		FiltroModel filtro = new FiltroModel();
 		model.addAttribute("filtro",filtro);
+		
+		model.addAttribute("lstAllLugares",lugarService.getAll());
 		
 		//Usado para validar el permiso
 		model.addAttribute("fechaActual",LocalDate.now());

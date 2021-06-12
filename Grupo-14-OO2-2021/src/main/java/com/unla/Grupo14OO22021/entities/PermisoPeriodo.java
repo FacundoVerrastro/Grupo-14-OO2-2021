@@ -86,6 +86,14 @@ public class PermisoPeriodo extends Permiso {
 	public void setDesdeHasta(Set<Lugar> desdeHasta) {
 		this.desdeHasta = desdeHasta;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "PermisoPeriodo [idPermiso=" + idPermiso + ", pedido=" + pedido + ", fecha=" + fecha + ", desdeHasta="
+				+ desdeHasta + ", cantDias=" + cantDias + ", vacaciones=" + vacaciones + ", rodado=" + rodado + "]";
+	}
 	
 	
 }
