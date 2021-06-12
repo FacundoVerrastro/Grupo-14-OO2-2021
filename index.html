@@ -64,8 +64,33 @@
             const vacaciones = urlParams.get("vacaciones");
             const rodado = urlParams.get("rodado");
 
+            tabla.innerHTML = `
+            <thead>
+            <tr>
+                <th>Pedido</th>
+                <th>Fecha</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Cantidad de dias</th>
+                <th>Vacaciones</th>
+                <th>Rodado Usado</th>
+                <th>Valido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span> ${pedido} </span></td>
+                <td><span> ${fecha} </span></td>
+                <td><span> ${desde} </span></td>
+                <td><span> ${hasta} </span></td>
+                <td><span> ${cantDias} </span></td>
+                <td><span> ${vacaciones} </span></td>
+                <td><span> ${rodado} </span></td>
+                <td><span> ${valido} </span></td>
+            </tr>
+        </tbody>
+            `;
         }
-        console.log(pedido + " " + fecha + " " + desde + " " + hasta);
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
