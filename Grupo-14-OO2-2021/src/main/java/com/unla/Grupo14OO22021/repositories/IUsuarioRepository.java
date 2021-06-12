@@ -21,4 +21,5 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Serializable>
 	
 	@Query("SELECT u FROM Usuario u JOIN FETCH u.perfil WHERE u.nomUsuario = (:nomUsuario)")
 	public abstract Usuario findByNomUsuarioAndFetchIdPerfilEagerly(@Param("nomUsuario") String nomUsuario);
+	
 }

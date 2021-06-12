@@ -23,11 +23,13 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lowagie.text.DocumentException;
 import com.unla.Grupo14OO22021.Exporters.UsuariosPDFExporter;
+import com.unla.Grupo14OO22021.converters.PerfilConverter;
 import com.unla.Grupo14OO22021.converters.UsuarioConverter;
 import com.unla.Grupo14OO22021.entities.Usuario;
 import com.unla.Grupo14OO22021.models.UsuarioModel;
 import com.unla.Grupo14OO22021.services.IPerfilService;
 import com.unla.Grupo14OO22021.services.IUsuarioService;
+import com.unla.Grupo14OO22021.repositories.IPerfilRepository;
 import com.unla.Grupo14OO22021.repositories.IUsuarioRepository;
 
 @Controller
@@ -50,6 +52,13 @@ public class UsuarioController {
 	@Qualifier("perfilService")
 	private IPerfilService perfilService;
 	
+	@Autowired
+	@Qualifier("perfilRepository")
+	private IPerfilRepository perfilRepository;
+	
+	@Autowired
+	@Qualifier("perfilConverter")
+	private PerfilConverter perfilConverter;
 
 	@GetMapping("/")
 	public ModelAndView index() {
@@ -62,7 +71,7 @@ public class UsuarioController {
 
 	@GetMapping(value="/editar/{id}")
 	public String modificarUsuario(@PathVariable int id,Model model) {
-		model.addAttribute(usuarioRepository.findById(id).orElse(null));
+		model.addAttribute("usuario",usuarioRepository.findById(id).orElse(null));
 		model.addAttribute("lstPerfiles",perfilService.getAll());
 		return "usuario/modificarUsuario";
 	}
@@ -96,8 +105,8 @@ public class UsuarioController {
 		return new RedirectView("/usuarios/");
 	}
 	@PostMapping(value = "/editarUsuario/")
-	public String update (@ModelAttribute Usuario usuario) {
-		usuarioRepository.saveAndFlush(usuario);
+	public String update (@ModelAttribute("usuario") UsuarioModel usuarioModel) {
+		usuarioRepository.saveAndFlush(usuarioConverter.modelToEntity(usuarioModel));
 		return "redirect:/usuarios/";
 	}
 	

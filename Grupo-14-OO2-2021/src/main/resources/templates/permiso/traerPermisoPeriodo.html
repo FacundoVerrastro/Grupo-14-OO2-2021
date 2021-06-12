@@ -46,6 +46,8 @@
 			</div>
 		</nav>
 	</main>
+
+
 	<table>
 		<thead>
 			<tr>
@@ -61,6 +63,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="permisoPeriodo :${permisosPeriodos}">
+			<div th:if="!(${fechaActual&lt;permisoPeriodo.fecha OR fechaActual&gt;permisoPeriodo.fecha.plusDays(permisoPeriodo.cantDias)}) OR ${!checkActivates}">
 				<td><span th:text="${permisoPeriodo.pedido.nombre}" /> <span
 						th:text="${permisoPeriodo.pedido.apellido}" /></td>
 				<td><span th:text="${permisoPeriodo.fecha}" /></td>
@@ -87,106 +90,13 @@
 						</svg>
 					</span>
 				</td>
-				<td><a type="button" class="btn btn-info" target="_self"
-						th:href="@{/permisos/editarPermisoPeriodo/} + ${permisoPeriodo.idPermiso}">Editar</a></td>
-				<td><a type="button" class="btn btn-danger" target="_self"
-						th:href="@{/permisos/eliminarPermisoPeriodo/} + ${permisoPeriodo.idPermiso}">Eliminar</a></td>
+			</div>
 			</tr>
 		</tbody>
 	</table>
-	<form action="#" th:action="@{/permisos/buscarPorPersonaPeriodo/}" th:object="${filtro} " method="post">
-		<p>
-		<h4>Buscar por persona:</h4><br />
-		<select class="form-control form-control-sm" th:field="*{idUsuario}">
-			<option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}" />
-		</select></p>
-		<input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br />
-	
-	<form action="#" th:action="@{/permisos/buscarPorRodado/}" th:object="${filtro} " method="post">
-		<p>
-		<h4>Buscar por rodado:</h4><br />
-		<select class="form-control form-control-sm" th:field="*{idRodado}">
-			<option th:each="i : ${lstRodados}" th:value="${i.idRodado}" th:text="${i.dominio}+' '+ ${i.vehiculo}" />
-		</select></p>
-		<input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br />
-	
-	<form action="#" th:action="@{/permisos/buscarEntreFechasPeriodo/}" th:object="${filtro} " method="post">
-		<p>
-		<h4>Buscar entre fechas:</h4><br />
-		<input type="date" th:field="*{primeraFecha}" />
-		<input type="date" th:field="*{segundaFecha}" />
-		</p>
-		<input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br />
 
-	<form action="#" th:action="@{/permisos/buscarEntreFechasYLugarPeriodo/}" th:object="${filtro} " method="post">
-		<p>
-		<h4>Buscar entre fechas y lugar:</h4><br />
-		<input type="date" th:field="*{primeraFecha}" />
-		<input type="date" th:field="*{segundaFecha}" />
-		<br />
-		<select class="form-control form-control-sm" th:field="*{idLugarDeterminado}">
-			<option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}"
-				th:text="${i.lugar}+' '+ ${i.codigoPostal}" />
-		</select>
-		</p>
-		<input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br />
-
-	<p>
-		<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-			aria-expanded="false" aria-controls="collapseExample">
-			Agregar Permiso Periodo
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample">
-		<div class="card card-body">
-			<form action="#" th:action="@{/permisos/permisoPeriodo/}" th:object="${lugarPermisoPeriodo} " method="post">
-				<p>Pedido Persona
-					<select class="form-control form-control-sm" th:field="*{idPedido}">
-						<option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}"
-							th:text="${i.nombre}+' '+ ${i.apellido}" />
-					</select>
-				</p>
-
-				<p>Fecha <input type="date" th:field="*{permisoPeriodo.fecha}" /></p>
-
-				<p>Desde <select class="form-control form-control-sm" th:field="*{idLugarDesde}">
-						<option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}"
-							th:text="${i.lugar}+' '+ ${i.codigoPostal}" />
-					</select></p>
-
-				<p>Hasta <select class="form-control form-control-sm" th:field="*{idLugarHasta}">
-						<option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}"
-							th:text="${i.lugar}+' '+ ${i.codigoPostal}" />
-					</select></p>
-
-				<p>Cantidad de dias <input type="text" th:field="*{permisoPeriodo.cantDias}" /></p>
-				<p>Vacaciones
-					<select class="form-control form-control-sm" th:field="*{permisoPeriodo.vacaciones}">
-						<option th:value="true" th:text="Si" />
-						<option th:value="false" th:text="No" />
-					</select></p>
-				</p>
-				<p>Rodado
-					<select class="form-control form-control-sm" th:field="*{idRodado}">
-						<option th:each="i : ${lstRodados}" th:value="${i.idRodado}"
-							th:text="${i.vehiculo}+' '+ ${i.dominio}" />
-					</select>
-				</p>
-
-				</br>
-				</p>
-				<input type="submit" />
-			</form>
-		</div>
-	</div>
+	<a type="button" class="btn btn-dark" target="_self"
+		href="http://localhost:8080/permisos/permisosPeriodos">Volver</a>
 
 
 	<!-- Bootstrap core JS-->

@@ -34,8 +34,8 @@ public class PermisoPeriodo extends Permiso {
 	@Column(name = "vacaciones")
 	public boolean vacaciones;
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn (name="idRodado")
+	@ManyToOne (fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+	@JoinColumn (name="idRodado",nullable=false)
 	public Rodado rodado;
 
 	public PermisoPeriodo() {
@@ -85,6 +85,14 @@ public class PermisoPeriodo extends Permiso {
 
 	public void setDesdeHasta(Set<Lugar> desdeHasta) {
 		this.desdeHasta = desdeHasta;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "PermisoPeriodo [idPermiso=" + idPermiso + ", pedido=" + pedido + ", fecha=" + fecha + ", desdeHasta="
+				+ desdeHasta + ", cantDias=" + cantDias + ", vacaciones=" + vacaciones + ", rodado=" + rodado + "]";
 	}
 	
 	
