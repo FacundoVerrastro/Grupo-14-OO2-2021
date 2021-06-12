@@ -18,6 +18,15 @@
     <script>
         const queryString = window.location.search;
         console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        const pedido = urlParams.get("pedido")
+
+        if (pedido === "diario") {
+            console.log("EL PEDIDO ES DIARIO")
+        }
+        if (pedido === "periodo") {
+            console.log("EL PEDIDO ES PERIODO")
+        }
     </script>
 
     <table>
