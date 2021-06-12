@@ -146,7 +146,6 @@ public class PermisoPeriodoController {
 		PermisoPeriodoModel permisoPeriodo = lugarPermisoPeriodoModel.getPermisoPeriodo();
 		permisoPeriodo.setDesdeHasta(new HashSet<LugarModel>());
 		permisoPeriodo.setPedido(usuarioConverter.entityToModel(pedido));
-		permisoPeriodo.setIdPermiso(lugarPermisoPeriodoModel.getIdPedido());
 		permisoPeriodo.setRodado(rodadoConverter.entityToModel(rodado));
 		
 		permisoPeriodo.getDesdeHasta().add(lugarConverter.entityToModel(lugarDesde));

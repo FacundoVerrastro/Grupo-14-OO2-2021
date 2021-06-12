@@ -35,6 +35,8 @@
                 </div>
             </nav>
         </main>
+       	
+	
 <table>
 		<thead>
 			<tr>
@@ -48,8 +50,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="permisoDiario :${permisosDiarios}">
-				
-				
+				<div th:if="${permisoDiario.fecha}==${fechaActual} OR ${!checkActivates}">
 				<td><span th:text="${permisoDiario.pedido.nombre}" /> <span th:text="${permisoDiario.pedido.apellido}" /></td>
 				<td><span th:text="${permisoDiario.fecha}" /></td>
 				<td th:each="i : ${permisoDiario.desdeHasta}"><span th:value="${i.lugar}" th:text="${i.lugar}+' '"></td>
@@ -65,70 +66,20 @@
 						</svg>
 					</span>
 				</td>
-				<td><a type="button" class="btn btn-info" target="_self" th:href="@{/permisos/editarPermisoDiario/} + ${permisoDiario.idPermiso}">Editar</a></td>
-				<td><a type="button" class="btn btn-danger" target="_self" th:href="@{/permisos/eliminarPermisoDiario/} + ${permisoDiario.idPermiso}">Eliminar</a></td>
+				</div>
 			</tr>
 		</tbody>
 	</table>
-	
+	<br/>
 	<form action="#" th:action="@{/permisos/buscarPorPersona/}" th:object="${filtro} " method="post">
 	<p>Buscar por persona: <select class="form-control form-control-sm" th:field="*{idUsuario}">
                              <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}"/>
                             </select></p>
                     <input value="Buscar" class="btn btn-warning" type="submit" />
 	</form>
-	<br/>
 	
-	<form action="#" th:action="@{/permisos/buscarEntreFechas/}" th:object="${filtro} " method="post">
-	<p>Buscar entre fechas: <input type="date" th:field="*{primeraFecha}" />
-    						<input type="date" th:field="*{segundaFecha}" />                         
-    </p>
-                    <input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br/>
-	  
-	  <form action="#" th:action="@{/permisos/buscarEntreFechasYLugar/}" th:object="${filtro} " method="post">
-	<p>Buscar entre fechas y lugr: <input type="date" th:field="*{primeraFecha}" />
-    						<input type="date" th:field="*{segundaFecha}" />           
-    						<select class="form-control form-control-sm" th:field="*{idLugarDeterminado}">
-                       		<option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
-                       		</select>       
-    </p>
-                    <input value="Buscar" class="btn btn-warning" type="submit" />
-	</form>
-	<br/>
-	   
-	<p>
-	  	<a class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	    	Agregar Permiso Diario
-	  	</a>
-	</p>
-	<div class="collapse" id="collapseExample">
-  		<div class="card card-body">
-		<form action="#" th:action="@{/permisos/permisoDiario}" th:object="${lugarPermisoDiario} " method="post">
-		<p>Pedido Persona
-                            <select class="form-control form-control-sm" th:field="*{idPedido}">
-                             <option th:each="i : ${lstUsuarios}" th:value="${i.idUsuario}" th:text="${i.nombre}+' '+ ${i.apellido}"/>
-                            </select>
-                             </p>
-		
-		<p>Fecha <input type="date" th:field="*{permisoDiario.fecha}" /></p>
-		
-		<p>Desde <select class="form-control form-control-sm" th:field="*{idLugarDesde}">
-                       <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
-                       </select></p>
-		
-		<p>Hasta       <select class="form-control form-control-sm" th:field="*{idLugarHasta}">             
-                       <option th:each="i : ${lstAllLugares}" th:value="${i.idLugar}" th:text="${i.lugar}+' '+ ${i.codigoPostal}"/>
-                       </select></p>
-        
-		<p>Motivo <input type="text" th:field="*{permisoDiario.motivo}" /></p>
-                             </br>
-        </p>               
-		<input class="btn btn-success" type="submit" />
-		</form>
-		</div>
-	</div>
+	<hr/>
+	<a type="button" class="btn btn-dark" target="_self" href="http://localhost:8080/permisos/permisosDiarios">Volver</a>
 	
 	
 <!-- Bootstrap core JS-->

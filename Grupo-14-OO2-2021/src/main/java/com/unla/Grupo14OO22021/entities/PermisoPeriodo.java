@@ -34,8 +34,8 @@ public class PermisoPeriodo extends Permiso {
 	@Column(name = "vacaciones")
 	public boolean vacaciones;
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn (name="idRodado")
+	@ManyToOne (fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+	@JoinColumn (name="idRodado",nullable=false)
 	public Rodado rodado;
 
 	public PermisoPeriodo() {

@@ -9,11 +9,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-@Table(name = "usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"idPerfil"}))
+//@Table(name = "usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"idPerfil"}))
+@Table(name = "usuario")
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idUsuario;
 	
 	@Column(name="nombre", nullable=false)
@@ -48,8 +49,8 @@ public class Usuario {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn (name="idPerfil")
+	@ManyToOne (fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+	@JoinColumn (name="idPerfil", nullable=false)
     private Perfil perfil;
 	
 	public Usuario() {

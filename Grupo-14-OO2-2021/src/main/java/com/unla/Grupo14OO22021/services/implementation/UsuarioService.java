@@ -38,7 +38,6 @@ public class UsuarioService implements IUsuarioService {
 	public boolean remove(int id) {
 		try {
 			usuarioRepository.delete(usuarioRepository.findByIdUsuario(id));
-			//usuarioRepository.deleteById;
 			return true;
 		}catch(Exception e){
 			return false;
