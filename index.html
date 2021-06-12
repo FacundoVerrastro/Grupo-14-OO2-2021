@@ -17,16 +17,24 @@
 <body class="d-flex flex-column h-100">
     <script>
         const queryString = window.location.search;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
-        const pedido = urlParams.get("pedido")
 
-        if (pedido === "diario") {
-            console.log("EL PEDIDO ES DIARIO")
+        const urlParams = new URLSearchParams(queryString);
+        const permiso = urlParams.get("permiso")
+
+        const pedido = urlParams.get("pedido");
+        const fecha = urlParams.get("fecha");
+        const desde = urlParams.get("desde");
+        const hasta = urlParams.get("hasta");
+
+        if (permiso === "diario") {
+            const motivo = urlParams.get("motivo");
         }
-        if (pedido === "periodo") {
-            console.log("EL PEDIDO ES PERIODO")
+        if (permiso === "periodo") {
+            const cantDias = urlParams.get("cantDias");
+            const vacaciones = urlParams.get("vacaciones");
+            const rodado = urlParams.get("rodado");
         }
+        console.log(pedido + " " + fecha + " " + desde + " " + hasta);
     </script>
 
     <table>
