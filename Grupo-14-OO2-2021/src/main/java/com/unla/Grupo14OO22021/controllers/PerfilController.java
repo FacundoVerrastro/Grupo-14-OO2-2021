@@ -48,7 +48,7 @@ public class PerfilController {
 	}
 	@GetMapping(value="/editar/{id}")
 	public String modificarUsuario(@PathVariable int id,Model model) {
-		model.addAttribute(perfilRepository.findById(id).orElse(null));
+		model.addAttribute("perfil",perfilRepository.findById(id).orElse(null));
 		return "perfil/modificarPerfil";
 	}
 	
