@@ -1,7 +1,9 @@
 package com.unla.Grupo14OO22021.controllers;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22021.Exporters.QRCodeGenerator;
 import com.unla.Grupo14OO22021.converters.LugarConverter;
 import com.unla.Grupo14OO22021.converters.PerfilConverter;
 import com.unla.Grupo14OO22021.converters.PermisoPeriodoConverter;
@@ -237,6 +240,39 @@ public class PermisoPeriodoController {
 		return "permiso/traerPermisoPeriodo";
 	}
 	
+	@PostMapping("/generarCodigoQRPermisoPeriodo/{idPedido}")
+	public String generateQRCodeImage(@PathVariable int idPedido) throws Exception {
+		
+		QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+		PermisoPeriodoModel permisoPeriodoModel = permisoPeriodoConverter.entityToModel(permisoPeriodoRepository.findByIdPermiso(idPedido));
+		
+		DateTimeFormatter formaters= DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		
+		Iterator<LugarModel> desdeHasta = permisoPeriodoModel.getDesdeHasta().iterator();
+		LugarModel desde = desdeHasta.next();
+		LugarModel hasta = desdeHasta.next();
+		String pedido=permisoPeriodoModel.getPedido().getNombre()+" "+permisoPeriodoModel.getPedido().getApellido();
+		String fecha=permisoPeriodoModel.getFecha().toString();
+		String cantDias=Integer.toString(permisoPeriodoModel.getCantDias());
+		String vacaciones=permisoPeriodoModel.isVacaciones()?"SI":"NO";
+		String rodado = permisoPeriodoModel.getRodado().getDominio()+" "+permisoPeriodoModel.getRodado().getVehiculo();
+		
+		String valido;
+		LocalDate fechaLimite = permisoPeriodoModel.getFecha().plusDays(permisoPeriodoModel.getCantDias());
+		if(LocalDate.now().compareTo(permisoPeriodoModel.getFecha())<0 || LocalDate.now().compareTo(fechaLimite)>permisoPeriodoModel.getCantDias()) {
+			valido="NO";
+		}else valido="SI";
+		
+		System.out.println(valido);
+		
+	    String url = "https://facundoverrastro.github.io/Grupo-14-OO2-2021/?permiso=periodo&pedido="+pedido+
+	    		"&fecha="+fecha+"&desde="+desde.getLugar()+"&hasta="+hasta.getLugar()+"&cantDias="+cantDias+
+	    		"&vacaciones="+vacaciones+"&rodado="+rodado+"&valido="+valido;
+	    
+	    qRCodeGenerator.generateQRCodeImage(url, 300, 300, "./src/main/resources/QRCode.png");
+
+	    return "redirect:/permisos/permisosPeriodos";
+	}
 	@PostMapping("/permisoPeriodo/")
 	public RedirectView create (@ModelAttribute("lugarPermisoPeriodo") LugarPermisoPeriodoModel lugarPermisoPeriodoModel){
 		
