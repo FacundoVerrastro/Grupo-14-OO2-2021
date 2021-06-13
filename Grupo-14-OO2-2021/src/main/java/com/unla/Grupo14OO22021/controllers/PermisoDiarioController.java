@@ -1,7 +1,9 @@
 package com.unla.Grupo14OO22021.controllers;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22021.Exporters.QRCodeGenerator;
 import com.unla.Grupo14OO22021.converters.LugarConverter;
 import com.unla.Grupo14OO22021.converters.PerfilConverter;
 import com.unla.Grupo14OO22021.converters.PermisoDiarioConverter;
@@ -190,6 +193,33 @@ public class PermisoDiarioController {
 		model.addAttribute("filtro", new FiltroModel());
 		return "permiso/traerPermisoDiario";
 	}
+
+	@PostMapping("/generarCodigoQRPermisoDiario/{idPedido}")
+	public String generateQRCodeImage(@PathVariable int idPedido) throws Exception {
+		
+		QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+		PermisoDiarioModel permisoDiarioModel = permisoDiarioConverter.entityToModel(permisoDiarioRepository.findByIdPermiso(idPedido));
+		
+		DateTimeFormatter formaters= DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		
+		Iterator<LugarModel> desdeHasta = permisoDiarioModel.getDesdeHasta().iterator();
+		LugarModel desde = desdeHasta.next();
+		LugarModel hasta = desdeHasta.next();
+		String pedido=permisoDiarioModel.getPedido().getNombre()+" "+permisoDiarioModel.getPedido().getApellido();
+		String fecha=permisoDiarioModel.getFecha().toString();
+		String motivo=permisoDiarioModel.getMotivo();
+		String valido=LocalDate.now().format(formaters).equals(permisoDiarioModel.getFecha().format(formaters))?"SI":"NO";
+		System.out.println(valido);
+		
+	    String url = "https://facundoverrastro.github.io/Grupo-14-OO2-2021/?permiso=diario&pedido="+pedido+
+	    		"&fecha="+fecha+"&desde="+desde.getLugar()+"&hasta="+hasta.getLugar()+"&motivo="+motivo+
+	    		"&valido="+valido;
+	    
+	    qRCodeGenerator.generateQRCodeImage(url, 300, 300, "./src/main/resources/QRCode.png");
+
+	    return "redirect:/permisos/permisosDiarios";
+	}
+	
 	@PostMapping("/permisoDiario")
 	public RedirectView create (@ModelAttribute("lugarPermisoDiario") LugarPermisoDiarioModel lugarPermisoDiarioModel){
 		

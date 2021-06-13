@@ -85,6 +85,11 @@
 						th:href="@{/permisos/editarPermisoDiario/} + ${permisoDiario.idPermiso}">Editar</a></td>
 				<td><a type="button" class="btn btn-danger" target="_self"
 						th:href="@{/permisos/eliminarPermisoDiario/} + ${permisoDiario.idPermiso}">Eliminar</a></td>
+						<td>
+						<form action="#" th:action="@{/permisos/generarCodigoQRPermisoDiario/}+${permisoDiario.idPermiso}" method="post">
+						<input class="btn btn-secondary" type="submit" value="QR"/>
+						</form>
+						</td>
 			</tr>
 		</tbody>
 	</table>
